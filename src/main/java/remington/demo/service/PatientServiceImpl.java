@@ -70,14 +70,17 @@ public class PatientServiceImpl implements PatientService {
         existingPatient.setEvaluation(patientDetails.getEvaluation());
 
         if (patientDetails.getMedicalExams() != null) {
+            existingPatient.getMedicalExams().clear(); // Vaciar la lista sin perder la referencia
+
             for (MedicalExam exam : patientDetails.getMedicalExams()) {
-                exam.setPatient(existingPatient); // Asegurar la relación
+                exam.setPatient(existingPatient); // 🔗 Mantener la relación
+                existingPatient.getMedicalExams().add(exam); // Agregar elementos en lugar de reemplazar la lista
             }
-            existingPatient.setMedicalExams(patientDetails.getMedicalExams());
         }
 
         return patientRepository.save(existingPatient);
     }
+
 
 
     @Override

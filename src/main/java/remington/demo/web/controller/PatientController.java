@@ -42,7 +42,7 @@ public class PatientController {
     }
 
     // 🔹 PUT - Actualizar un paciente por ID
-    @PutMapping("/{id}")
+    @PutMapping("/edits/{id}")
     public ResponseEntity<Patient> updatePatient(@PathVariable Long id, @RequestBody Patient patientDetails) {
         Patient updatedPatient = patientService.updatePatient(id, patientDetails);
         return ResponseEntity.ok(updatedPatient);
